@@ -84,18 +84,22 @@ def draw_game_screen():
         item.draw(screen)
 
     # how much distance in one time step
-    distance_per_timestep = delta_time * player_one.speed
-    time_steps_per_double_radius = 2 * player_one.radius / distance_per_timestep
-    ignore_last_n = math.ceil(time_steps_per_double_radius / player_one.record_every_nth_timestep)
+    distance_per_timestep_player_one = delta_time * player_one.speed
+    time_steps_per_double_radius_player_one = 2 * player_one.radius / distance_per_timestep_player_one
+    ignore_last_n_player_one = math.ceil(time_steps_per_double_radius_player_one / player_one.record_every_nth_timestep)
+
+    distance_per_timestep_player_two = delta_time * player_two.speed
+    time_steps_per_double_radius_player_two = 2 * player_two.radius / distance_per_timestep_player_two
+    ignore_last_n_player_two = math.ceil(time_steps_per_double_radius_player_two / player_two.record_every_nth_timestep)
 
     if intersects_circle_and_path(player_one.position, player_one.radius,
-                                  player_one.past_positions[:-ignore_last_n]) or (
+                                  player_one.past_positions[:-ignore_last_n_player_one]) or (
             intersects_circle_and_path(player_one.position, player_one.radius, player_two.past_positions)):
         who_won = 2
         game_state = GameState.GAME_OVER
 
     if intersects_circle_and_path(player_two.position, player_two.radius,
-                                  player_two.past_positions[:-ignore_last_n]) or (
+                                  player_two.past_positions[:-ignore_last_n_player_two]) or (
             intersects_circle_and_path(player_two.position, player_two.radius, player_one.past_positions)):
         who_won = 1
         game_state = GameState.GAME_OVER

@@ -12,6 +12,7 @@ class Player:
         self.initial_direction = pymath.Vector2(direction).normalize()
 
         self.speed = speed
+        self.initial_speed = speed
         self.rotation_speed = rotation_speed
         self.radius = 10
         self.color = (0, 0, 255) if player_id == 1 else (255, 0, 0)
@@ -23,6 +24,7 @@ class Player:
     def reset(self):
         self.position = self.initial_position
         self.direction = self.initial_direction
+        self.speed = self.initial_speed
         self.past_positions = []
         self.timestep_counter = 0
 
